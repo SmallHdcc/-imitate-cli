@@ -19,11 +19,12 @@
 
 void init_directory()
 {
+    // 初始化快捷方式文件夹
     if (access("shortcut", F_OK) == -1)
     {
-        int flag = mkdir("shortcuts");
-        assert(flag == 0);
-        printf("初始化快捷方式文件夹成功！\n");
+        // 如果文件夹存在 不创建
+        int flag = mkdir("shortcut");
+        ASSERT(flag == 0, "初始化快捷方式文件夹失败！");
     }
 
     // 初始化json文件,来对应！
@@ -101,7 +102,7 @@ int main(int argc, char *argv[])
 {
     init_directory();
 
-    assert(argc == 3 || argc == 2);
+    ASSERT(argc == 3 || argc == 2, "使用 open h 查看帮助信息！");
 
     ASSERT(argv[1][0] == 'o' || argv[1][0] == 'h', "参数错误！");
     if (argv[1][0] == 'h')
